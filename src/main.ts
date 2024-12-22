@@ -139,7 +139,17 @@ function main() {
     }
   });
 
+  
   // Password input
+  let isOverPasswordContainer = false;
+  passwordContainer.addEventListener("mouseenter", () => {
+    isOverPasswordContainer = true;
+  });
+
+  passwordContainer.addEventListener("mouseleave", () => {
+    isOverPasswordContainer = false;
+  });
+
   // Focus by click
   passwordInput.addEventListener("mouseup", () => {
     if (passwordContainer.dataset["showPasswordState"] === "hide") {
@@ -162,8 +172,10 @@ function main() {
 
   // Lost focus
   passwordInput.addEventListener("blur", () => {
-    takeSunGlassesOff();
-    setGopherPupils(defaultPupilLeft, defaultPupilTop);
+    if (!isOverPasswordContainer) {
+      takeSunGlassesOff();
+      setGopherPupils(defaultPupilLeft, defaultPupilTop);
+    }
   });
 
   // Typing
